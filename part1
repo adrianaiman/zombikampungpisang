@@ -1,8 +1,55 @@
-#include <iostream> 
+#include <iostream>
+#include <string>
+
 using namespace std;
 
-int main ()
+void Menu()
 {
+    int decision;
+    do
+    {
+    
+    
+        cout<<" 0) Play the game"<<endl;
+        cout<<" 1) Load Game "<< endl;
+        cout<<" 2) customize Game Settings "<<endl;
+        cout<<" 3) Exit Game"<<endl;
+        cin>>decision;
+        switch (decision)
+        {
+
+            case 0: 
+                cout<< " Welcome to ALien Vs Zomvie!!!\n";
+                break;
+            
+            case 1: 
+                cout <<" Please wait for game to Load \n";
+                break;
+            
+            case 2:
+                cout<<" How would you like to play\n ";
+                break;
+
+            case 3:
+                cout<<" Press 1 to confirm exit of the game \n";
+                break;
+
+        }
+
+
+
+    }
+    while(decision !=3);
+      
+       
+
 }
 
+int main()
+{
 
+    Menu();
+    // cout << "Assignment (Part 1)" << endl;
+    // cout << "Let's Get Started!" << endl;
+    //pf::Pause();
+}
