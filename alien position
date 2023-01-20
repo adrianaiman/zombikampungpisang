@@ -1,0 +1,10 @@
+     void alienPlacement(vector<char> & table, const int rowNum, const int colNum, const int zombiesNum)
+        {
+            for (int i = 0; i < map_(); ++i)
+            {
+                if (i == ((rowNum * 2 + 1) * colNum) + rowNum)
+                {
+                    map_[i] = 'A';
+                }
+            }
+       
