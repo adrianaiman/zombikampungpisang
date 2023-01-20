@@ -1,0 +1,19 @@
+void zombiePlacement(vector<char> & table, const int rowNum, const in colNum, const int zombiesNum)
+        {
+            char zombiesTroop[9] = {' ', ' ', ' ', ' ', ' ', 'r', '^', '>', '<', 'v', 'p', 'h', '1', '2'};
+            int tempRowNum = rowNum;
+            int tempColNum = colNum;
+            int randomCoordinate = 0;
+
+            int zombiesCount = 0;
+            while (zombiesCount < zombiesNum)
+            {
+                randomCoordinate = randomCoordinateForZombies(tempRowNum, TempColNum);
+
+                if (table[randomCoordinate] != 'A')
+                {
+                    table[randomCoordinate] = zombiesTroop[zombiesCount];
+                    zombiesCount = zombiesCount + 1;
+                }
+            }
+        }
