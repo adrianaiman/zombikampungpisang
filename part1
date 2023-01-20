@@ -1,3 +1,16 @@
+// ********************************************************* 
+// Course: TCP1101 PROGRAMMING FUNDAMENTALS 
+// Year: Trimester 1, 2022/23 (T2215) 
+// Lab: TT7L 
+// Names: AL_Arshad_Bin_Al_Hanisham | MEMBER_NAME_2 | MEMBER_NAME_3 
+// IDs: MEMBER_ID_1 | MEMBER_ID_2 | MEMBER_ID_3 
+// Emails: arshadhanisham@gmail.com| MEMBER_EMAIL_2 | MEMBER_EMAIL_3 
+// Phones: 0164202003 | MEMBER_PHONE_2 | MEMBER_PHONE_3 
+// ********************************************************* 
+
+// TODO: Fill in the missing information above and delete this line.
+
+//#include "pf/helper.h"
 #include <iostream>
 #include <string>
 
@@ -8,12 +21,17 @@ void Menu()
     int decision;
     do
     {
-    
-    
+        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*"<<endl;
+        cout<<"   Alien vs Zombie      "<<endl;
+        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*"<<endl;
         cout<<" 0) Play the game"<<endl;
-        cout<<" 1) Load Game "<< endl;
+        cout<<" 1) New Game  "<< endl;
         cout<<" 2) customize Game Settings "<<endl;
         cout<<" 3) Exit Game"<<endl;
+        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*"<<endl;
+        cout<<"    BE PREPARED!!!      "<<endl;
+        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*"<<endl<<endl;
+        cout<<" choose your fate =>";
         cin>>decision;
         switch (decision)
         {
