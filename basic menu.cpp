@@ -21,16 +21,16 @@ void Menu()
     int decision;
     do
     {
-        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*"<<endl;
+        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*"<<endl;
         cout<<"   Alien vs Zombie      "<<endl;
-        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*"<<endl;
-        cout<<" 0) Play the game"<<endl;
-        cout<<" 1) Load Game "<< endl;
-        cout<<" 2) customize Game Settings "<<endl;
-        cout<<" 3) Exit Game"<<endl;
-        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*"<<endl;
+        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*"<<endl;
+        cout<<"|| 0) New Game                || "<<endl;
+        cout<<"|| 1) Load Game               || "<< endl;
+        cout<<"|| 2) customize Game Settings || "<<endl;
+        cout<<"|| 3) Exit Game               || " <<endl;
+        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*"<<endl;
         cout<<"    BE PREPARED!!!      "<<endl;
-        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*"<<endl<<endl;
+        cout<<"=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*"<<endl<<endl;
         cout<<" choose your fate =>";
         cin>>decision;
         switch (decision)
