@@ -1,0 +1,197 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+using namespace std;
+
+class Mars
+{
+private:
+    vector<vector<char>> map_;
+    int dimX_, dimY_;
+
+public:
+    Mars(int dimX = 15, int dimY = 5);
+    void init(int dimX, int dimY);
+    void display() const;
+
+    int getDimX() const;
+    int getDimY() const;
+    char getObject(int x, int y) const;
+    void setObject(int x, int y, char ch);
+    bool isEmpty(int x, int y);
+    bool isInsideMap(int x, int y);
+};
+
+int Mars::getDimX() const
+{
+    return dimX_;
+}
+int Mars::getDimY() const
+{
+    return dimY_;
+}
+
+Mars::Mars(int dimX, int dimY)
+{
+    init(dimX, dimY);
+}
+
+void Mars::init(int dimX, int dimY)
+{
+    dimX_ = dimX;
+    dimY_ = dimY;
+    char objects[] = {' ', ' ', ' ', ' ', ' ', ' ', 'X', '#', '@', '$'};
+    int noOfObjects = 10; // number of objects in the objects array
+
+    // create dynamic 2D array using vector
+    map_.resize(dimY_);             // create empty rows
+    for (int i = 0; i < dimY_; ++i) // for each row, allocate y
+    {
+        map_[i].resize(dimX_); // resize each row
+    }
+    // put random characters into the vector array
+    for (int i = 0; i < dimY_; ++i)
+    {
+        for (int j = 0; j < dimX_; ++j)
+        {
+            int objNo = rand() % noOfObjects;
+            map_[i][j] = objects[objNo];
+        }
+    }
+}
+
+void Mars::setObject(int x, int y, char ch)
+{
+    map_[dimY_ - y][x - 1] = ch;
+}
+
+void Mars::display() const
+{
+    
+    cout << " --__--__--__--__--__--__--__--_" << endl;
+    cout << " = Alien vs Zombie ヽ( `д´*)ノ =" << endl;
+    cout << " __--__--__--__--__--__--__--__-" << endl;
+    // for each row
+    for (int i = 0; i < dimY_; ++i)
+    {
+        // display upper border of the row
+        cout << " ";
+        for (int j = 0; j < dimX_; ++j)
+        {
+            cout << "+-";
+        }
+        cout << "+" << endl;
+        // display row number
+        cout << setw(2) << (dimY_ - i);
+        // display cell content and border of each column
+        for (int j = 0; j < dimX_; ++j)
+        {
+            cout << "|" << map_[i][j];
+        }
+        cout << "|" << endl;
+    }
+    // display lower border of the last row
+    cout << " ";
+    for (int j = 0; j < dimX_; ++j)
+    {
+        cout << "+-";
+    }
+    cout << "+" << endl;
+    // display column number
+    cout << " ";
+    for (int j = 0; j < dimX_; ++j)
+    {
+        int digit = (j + 1) / 10;
+        cout << " ";
+        if (digit == 0)
+            cout << " ";
+        else
+            cout << digit;
+    }
+    cout << endl;
+    cout << " ";
+    for (int j = 0; j < dimX_; ++j)
+    {
+        cout << " " << (j + 1) % 10;
+    }
+    cout << endl
+         << endl;
+}
+
+bool Mars::isEmpty(int x, int y)
+{
+    return map_[dimY_ - y][x - 1] == ' ';
+}
+
+bool Mars::isInsideMap(int x, int y)
+{
+    return x >= 1 && x <= dimX_ && y >= 1 && y <= dimY_;
+}
+
+class Rover
+{
+private:
+    int x_, y_;
+    char heading_; // either '^', '>', '<' or 'v'
+public:
+    Rover();
+    void land(Mars &mars);
+    int getX() const;
+    int getY() const;
+    char getHeading() const;
+};
+Rover::Rover()
+{
+}
+
+void Rover::land(Mars &mars)
+{
+    char possibleHeading[] = {'^', '>', '<', 'v'};
+    x_ = rand() % mars.getDimX() + 1;
+    y_ = rand() % mars.getDimY() + 1;
+    heading_ = possibleHeading[rand() % 4];
+    mars.setObject(x_, y_, heading_);
+}
+
+int Rover::getX() const
+{
+    return x_;
+}
+
+int Rover::getY() const
+{
+    return y_;
+}
+char Rover::getHeading() const
+{
+    return heading_;
+}
+
+void test2_1()
+{
+    Mars mars;
+    Rover curiosity;
+    curiosity.land(mars);
+    mars.display();
+    cout << "Status of the rover:" << endl
+         << " Location: (" << curiosity.getX() << ", " << curiosity.getY() << ")"
+
+         << endl
+
+         << " Heading: " << curiosity.getHeading() << endl;
+}
+
+
+
+
+int main()
+{
+    //srand(1); // use this for fixed map during testing
+    srand(time(NULL)); // try this for random map
+
+    test2_1();
+    //test2_2();
+}
