@@ -1,0 +1,10 @@
+void custom()
+{
+    int numRow;
+    cout << "Number of rows : ";
+    cin >> numRow;
+
+    int numCol;
+    cout << "Number of coloumns : ";
+    cin >> numCol;
+}
