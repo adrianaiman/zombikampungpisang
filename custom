@@ -26,6 +26,20 @@ void custom()
     int numY;
     cout << "Number of columns : ";
     cin >> numY;
+
+    int numZombies;
+    cout << "Number of Zombies (1-9) :";
+    cin >> numZombies;
+    if (numZombies<9, numZombies> 0)
+    {
+        cout << " -------------------------------" << endl;
+        cout << " = Alien vs Zombie ヽ( `д´*)ノ =" << endl;
+        cout << " -------------------------------" << endl;
+    }
+    else
+    {
+        cout << "Please insert the number of zombies between the range" << endl;
+    }
 }
 
 Mars::Mars(int numX, int numY)
@@ -57,13 +71,12 @@ void Mars::init(int numX, int numY)
     }
 }
 
+
 void Mars::display() const
 {
     // comment this out during testing
     // system("cls"); // OR system("clear"); for Linux / MacOS
-    cout << " ----------------_" << endl;
-    cout << " = Alien vs Zombie ヽ( `д´*)ノ =" << endl;
-    cout << " --------------__-" << endl;
+
     // for each row
     for (int i = 0; i < numY_; ++i)
     {
