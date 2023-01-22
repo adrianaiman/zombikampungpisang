@@ -137,6 +137,9 @@ void displayBoard(int & numX, int & numY, vector<vector<char>> & grid){
         generateBoard(numX, numY, grid);
         generateInpluto(numX, numY, grid);
         generateZombies(numX, numY, grid);
-        displayBoard(numX, numY, grid);
-        return 0;
+        if(zombies>0 && zombies <10) 
+        {
+       displayBoard(numX, numY, grid);
+    }
+    return 0;
     }
