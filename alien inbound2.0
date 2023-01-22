@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iomanip> // for setw()
+using namespace std;
+
+// variable access for all functions
+int numX;
+int numY;
+
+void Board(int &numX, int &numY)
+{
+    cout << " -------------------------------" << endl;
+    cout << " = Alien vs Zombie ヽ( `д´*)ノ =" << endl;
+    cout << " -------------------------------" << endl;
+    // for each row
+    // numX=num row numY= num column
+
+    cout << "Enter number of rows=>";
+    cin >> numX;
+    cout << " Enter number of column=>";
+    cin >> numY;
+
+    vector<vector<char>> grid(numX, vector<char>(numY, ' '));
+
+    // Place 'A' in the middle of the grid
+    int midX = (numX + 1) / 2 - 1;
+    int midY = (numY + 1) / 2 - 1;
+    grid[midX][midY] = 'A';
+
+    for (int i = 0; i < numX; i++)
+    {
+        // display upper border of the Row
+        cout << " ";
+        cout << " ";
+        for (int j = 0; j < numY; j++)
+        {
+            cout << "+-";
+        }
+        cout << "+" << endl;
+        // display row number
+        cout << setw(2) << i + 1;
+
+        for (int j = 0; j < numY; j++)
+        {
+            cout << "|" << grid[i][j];
+        }
+        cout << "|" << endl;
+    }
+
+    cout << " ";
+    cout << " ";
+    for (int j = 0; j < numY; j++)
+    {
+        cout << "+-";
+    }
+    cout << "+" << endl;
+
+    cout << " ";
+    cout << " ";
+    for (int j = 0; j < numY; ++j)
+    {
+        int digit = (j + 1) / 10;
+        cout << " ";
+        if (digit == 0)
+            cout << " ";
+        else
+            cout << digit;
+    }
+
+    cout << endl;
+    cout << " ";
+    cout << " ";
+    for (int j = 0; j < numY; ++j)
+    {
+        cout << " " << (j + 1) % 10;
+    }
+    cout << endl
+         << endl;
+}
+
+int main()
+{
+    int numX, numY;
+  
+    Board(numX, numY);
+  
+    return 0;
+}
