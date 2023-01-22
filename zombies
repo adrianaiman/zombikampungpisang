@@ -1,0 +1,142 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iomanip> // for setw()
+using namespace std;
+
+int numX;
+int numY;
+int zombies;
+
+void generateBoard(int &numX, int &numY, vector<vector<char>> &grid)
+{
+    cout << " -------------------------------" << endl;
+    cout << " = Alien vs Zombie ヽ( `д´*)ノ =" << endl;
+    cout << " -------------------------------" << endl;
+
+    cout << "Enter number of rows=>";
+    cin >> numX;
+    cout << " Enter number of column=>";
+    cin >> numY;
+
+    grid.resize(numX, vector<char>(numY));
+
+    // Place 'A' in the middle of the grid
+    int midX = (numX - 1) / 2;
+    int midY = (numY - 1) / 2;
+
+    grid[midX][midY] = 'A';
+
+    // cout << grid[midX][midY] << endl;
+}
+
+void generateInpluto(int &numX, int &numY, vector<vector<char>> &grid)
+{
+    char objects[] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', '<', '^', '>', 'v', 'h', 'p', 'r', 'p'};
+    int noOfObjects = 15; // number of objects in the objects array
+
+    // put random characters into the vector array
+    for (int i = 0; i < numX; ++i)
+    {
+        for (int j = 0; j < numY; ++j)
+        {
+            if (grid[i][j] != 'A')
+            {
+                int objNo = rand() % noOfObjects;
+                grid[i][j] = objects[objNo];
+            }
+        }
+    }
+}
+
+void generateZombies(int &numX, int &numY, vector<vector<char>> &grid)
+{
+cout << "Number of Zombies (1-9) => ";
+    cin >> zombies;
+
+    char objects[9] = {'1','2','3','4','5','6','7','8','9'};
+
+    if (zombies>0 && zombies <10)
+    {
+        int generatedZombies = 0;
+        while (generatedZombies < zombies)
+        {
+            int randomIndex = rand() % (numX * numY);
+            int x = randomIndex / numY;
+            int y = randomIndex % numY;
+            if (grid[x][y] != '1','2','3','4','5','6','7','8','9')
+            {
+                grid[x][y] = objects[generatedZombies];
+                generatedZombies = generatedZombies + 1;
+            }
+        }
+    }
+    else
+    {
+        cout << "Invalid!" << endl;
+        cout << "Please insert the number of zombies between the range 1-9" << endl;
+    }
+}
+void displayBoard(int & numX, int & numY, vector<vector<char>> & grid){
+
+            for (int i = 0;
+        i < numX; i++)
+        {
+            // display upper border of the Row
+            cout << " ";
+            cout << " ";
+            for (int j = 0; j < numY; j++)
+            {
+                cout << "+-";
+            }
+            cout << "+" << endl;
+            // display row number
+            cout << setw(2) << i + 1;
+
+            for (int j = 0; j < numY; j++)
+            {
+                cout << "|" << grid[i][j];
+            }
+            cout << "|" << endl;
+        }
+
+        cout << " ";
+        cout << " ";
+        for (int j = 0; j < numY; j++)
+        {
+            cout << "+-";
+        }
+        cout << "+" << endl;
+
+        cout << " ";
+        cout << " ";
+        for (int j = 0; j < numY; ++j)
+        {
+            int digit = (j + 1) / 10;
+            cout << " ";
+            if (digit == 0)
+                cout << " ";
+            else
+                cout << digit;
+        }
+
+        cout << endl;
+        cout << " ";
+        cout << " ";
+        for (int j = 0; j < numY; ++j)
+        {
+            cout << " " << (j + 1) % 10;
+        }
+        cout << endl
+             << endl;
+    }
+
+    int main()
+    {
+        vector<vector<char>> grid;
+        generateBoard(numX, numY, grid);
+        generateInpluto(numX, numY, grid);
+        generateZombies(numX, numY, grid);
+        displayBoard(numX, numY, grid);
+        return 0;
+    }
