@@ -291,9 +291,6 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY)
         int level;
         cout << "who is playing the game=>";
         cin >> player;
-        cout << "what level are you on=>";
-        cin >> level;
-
         string filename;
         cout << "Enter the file name to save your game=>";
         cin >> filename;
@@ -304,8 +301,18 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY)
             return;
         }
 
+        // save player name
         savefile << player << endl;
-        savefile << level << endl;
+
+        // save grid
+        for (int i = 0; i < numX; i++)
+        {
+            for (int j = 0; j < numY; j++)
+            {
+                savefile << grid[i][j] << " ";
+            }
+            savefile << endl;
+        }
 
         // Add any other variables that you want to save
         if (!savefile.good())
@@ -326,7 +333,6 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY)
         cin >> filename;
         ifstream loadfile(filename);
 
-
         if (!loadfile.is_open())
         {
             cerr << "error: failed to load file" << endl;
@@ -336,10 +342,25 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY)
         // read players file
 
         string player;
-        int level;
-        
-
-        loadfile >> player >> level;
+        loadfile >> player;
+        for (int i = 0; i < numX; i++)
+        {
+            for (int j = 0; j < numY; j++)
+            {
+                loadfile >> grid[i][j];
+            }
+        }
+        for (int i = 0; i < numX; i++)
+        {
+            for (int j = 0; j < numY; j++)
+            {
+                cout << grid[i][j] << " ";
+            }
+            cout << endl;
+        }
+        // Close the file
+        loadfile.close();
+        cout << "Game loaded successfully from " << filename << "!" << endl;
     }
     // else if (moveDirection == "quit")
     // {
