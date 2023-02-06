@@ -242,7 +242,13 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
             currentX--;                     // move up
             if (grid[currentX][currentY] == 'h')
             {
+                cout << "Alien finds a health pack."<< endl;
+                cout << "Alien's health increased by 5"<< endl;
                 A_health += 5;
+            }
+             if (grid[currentX][currentY] == 'r')
+            {
+                cout << "Alien finds a rock."<< endl;
             }
             grid[currentX][currentY] = 'A'; // update new position
         }
@@ -255,7 +261,13 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
             currentX++;
             if (grid[currentX][currentY] == 'h')
             {
+                cout << "Alien finds a health pack."<< endl;
+                cout << "Alien's health increased by 5"<< endl;
                 A_health += 5;
+            }
+             if (grid[currentX][currentY] == 'r')
+            {
+                cout << "Alien finds a rock."<< endl;
             }
             grid[currentX][currentY] = 'A';
         }
@@ -268,7 +280,13 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
             currentY--;
             if (grid[currentX][currentY] == 'h')
             {
+                cout << "Alien finds a health pack."<< endl;
+                cout << "Alien's health increased by 5"<< endl;
                 A_health += 5;
+            }
+            if (grid[currentX][currentY] == 'r')
+            {
+                cout << "Alien finds a rock."<< endl;
             }
             grid[currentX][currentY] = 'A';
         }
@@ -281,7 +299,13 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
             currentY++;
             if (grid[currentX][currentY] == 'h')
             {
+                cout << "Alien finds a health pack."<< endl;
+                cout << "Alien's health increased by 5"<< endl;
                 A_health += 5;
+            }
+             if (grid[currentX][currentY] == 'r')
+            {
+                cout << "Alien finds a rock."<< endl;
             }
             grid[currentX][currentY] = 'A';
         }
