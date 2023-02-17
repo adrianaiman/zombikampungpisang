@@ -106,10 +106,10 @@ void generateBoard(int &numX, int &numY, vector<vector<char>> &grid)
     grid.resize(numX, vector<char>(numY));
 
     // Place 'A' in the middle of the grid
-    int midX = (numX - 1) / 2;
-    int midY = (numY - 1) / 2;
+    int currentX = (numX - 1) / 2;
+    int currentY = (numY - 1) / 2;
 
-    grid[midX][midY] = 'A';
+    grid[currentX][currentY] = 'A';
 }
 
 void generateInpluto(int &numX, int &numY, vector<vector<char>> &grid)
@@ -340,44 +340,8 @@ void loadGame(vector<vector<char>> &grid, int &currentX, int &currentY, int &A_h
     loadfile.close();
 }
 
-void moveZombies(int &numX, int &numY, vector<vector<char>> &grid, vector<pair<int, int>> &zombieCoordinates)
-{
-    char objects[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-    int newX, newY;
-    for (int i = 0; i < zombies; i++)
-    {
-        int x = zombieCoordinates[i].first;
-        int y = zombieCoordinates[i].second;
-        int moveDirection = rand() % 4;
-        switch (moveDirection)
-        {
-        case 0: // move up
-            newX = x - 1;
-            newY = y;
-            break;
-        case 1: // move right
-            newX = x;
-            newY = y + 1;
-            break;
-        case 2: // move down
-            newX = x + 1;
-            newY = y;
-            break;
-        case 3: // move left
-            newX = x;
-            newY = y - 1;
-            break;
-        }
-        if (newX >= 0 && newX < numX && newY >= 0 && newY < numY && grid[newX][newY] == ' ')
-        {
-            grid[newX][newY] = objects[i];
-            zombieCoordinates[i] = make_pair(newX, newY);
-            grid[x][y] = ' ';
-        }
-    }
-}
 
-void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int &A_health, int &Z_health, const int &Z_attack_damage, const string &player, vector<pair<int, int>> &zombieCoordinates)
+void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int &A_health, int &Z_health, const int &Z_attack_damage, const string &player, vector<pair<int, int>> &zombieCoordinates, int &A_attack_range)
 {
     string moveDirection;
     cout << "COMMANDS=> ";
@@ -418,18 +382,22 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
             }
             else if (grid[currentX][currentY] == '^')
             {
+                A_attack_range += 1;
                 currentX--;
             }
             else if (grid[currentX][currentY] == 'v')
             {
+                A_attack_range += 1;
                 currentX++;
             }
             else if (grid[currentX][currentY] == '<')
             {
+                A_attack_range += 1;
                 currentY--;
             }
             else if (grid[currentX][currentY] == '>')
             {
+                A_attack_range += 1;
                 currentY++;
             }
 
@@ -443,7 +411,6 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
             grid[currentX][currentY] = 'A';
             //moveZombies(numX, numY, grid, zombieCoordinates);
         }
-        
     }
     else if (moveDirection == "s" || moveDirection == "S")
     {
@@ -487,18 +454,22 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
 
             else if (grid[currentX + 1][currentY] == '<')
             {
+                A_attack_range += 1;
                 currentY--;
             }
             else if (grid[currentX + 1][currentY] == '>')
             {
+                A_attack_range += 1;
                 currentY++;
             }
             else if (grid[currentX + 1][currentY] == '^')
             {
+                A_attack_range += 1;
                 currentX--;
             }
             else if (grid[currentX + 1][currentY] == 'v')
             {
+                A_attack_range += 1;
                 currentX++;
             }
             else
@@ -514,7 +485,7 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
                 // Z_attack_damage == 0;
             }
             grid[currentX][currentY] = 'A';
-            moveZombies(numX, numY, grid, zombieCoordinates);
+            //moveZombies(numX, numY, grid, zombieCoordinates);
         }
     }
     else if (moveDirection == "a" || moveDirection == "A")
@@ -558,18 +529,22 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
             }
             else if (grid[currentX][currentY - 1] == '<')
             {
+                A_attack_range += 1;
                 currentY--;
             }
             else if (grid[currentX][currentY - 1] == '>')
             {
+                A_attack_range += 1;
                 currentY++;
             }
             else if (grid[currentX][currentY - 1] == '^')
             {
+                A_attack_range += 1;
                 currentX--;
             }
             else if (grid[currentX][currentY - 1] == 'v')
             {
+                A_attack_range += 1;
                 currentX++;
             }
 
@@ -582,7 +557,7 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
             }
 
             grid[currentX][currentY] = 'A';
-            moveZombies(numX, numY, grid, zombieCoordinates);
+            //moveZombies(numX, numY, grid, zombieCoordinates);
         }
     }
     else if (moveDirection == "d" || moveDirection == "D")
@@ -627,14 +602,16 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
             }
             else if (grid[currentX][currentY] == '>')
             {
+                A_attack_range += 1;
                 currentY++;
             }
             else if (grid[currentX][currentY] == '<')
             {
+                A_attack_range += 1;
                 currentY--;
             }
             grid[currentX][currentY] = 'A';
-            moveZombies(numX, numY, grid, zombieCoordinates);
+            //moveZombies(numX, numY, grid, zombieCoordinates);
         }
     }
     // Check if there's a '^' or 'v' in the grid, if so move the alien in that direction
@@ -642,6 +619,7 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
     {
         if (currentX > 0)
         {
+            A_attack_range += 1;
             currentX--;
         }
     }
@@ -649,6 +627,7 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
     {
         if (currentX < grid.size() - 1)
         {
+            A_attack_range += 1;
             currentX++;
         }
     }
@@ -691,7 +670,8 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
         {
             return;
         }
-        else;
+        else
+            ;
         cout << "Invalid! Please state (yes/no) only" << endl;
     }
 
@@ -700,8 +680,62 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
         cout << "Please enter a valid command or type Help for command menue" << endl;
     }
 
-    moveZombies(numX, numY, grid, zombieCoordinates);
+    //moveZombies(numX, numY, grid, zombieCoordinates);
 }
+
+void moveZombies(int &numX, int &numY, vector<vector<char>> &grid, vector<pair<int, int>> &zombieCoordinates, int& Z_attack_range, int& A_health, int Z_attack_damage, int &currentX, int &currentY)
+{
+    char objects[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    int newX, newY;
+    for (int i = 0; i < zombies; i++)
+    {
+        int x = zombieCoordinates[i].first;
+        int y = zombieCoordinates[i].second;
+        int moveDirection = rand() % 4;
+        switch (moveDirection)
+        {
+        case 0: // move up
+            newX = x - 1;
+            newY = y;
+            break;
+        case 1: // move right
+            newX = x;
+            newY = y + 1;
+            break;
+        case 2: // move down
+            newX = x + 1;
+            newY = y;
+            break;
+        case 3: // move left
+            newX = x;
+            newY = y - 1;
+            break;
+        }
+        if (newX >= 0 && newX < numX && newY >= 0 && newY < numY)
+        {
+            grid[newX][newY] = objects[i];
+            zombieCoordinates[i] = make_pair(newX, newY);
+            grid[x][y] = ' ';
+        }
+
+        int distanceX = abs(currentX - newX);
+        int distanceY = abs(currentY - newY);
+        if (distanceX <= Z_attack_range && distanceY <= Z_attack_range)
+        {
+            if (distanceX == 0 || distanceY == 0 || distanceX == distanceY) // check if the zombie is in range to attack the alien
+            {
+                int zombieDistanceX = abs(currentX - x);
+                int zombieDistanceY = abs(currentY - y);
+                if (zombieDistanceX <= Z_attack_range && zombieDistanceY <= Z_attack_range) // check if the zombie is in range to attack the alien
+                {
+                    A_health -= Z_attack_damage; // zombie attacks the alien and reduces its health
+                    break;                       // break out of the for loop, so that only one zombie attacks the alien
+                }
+            }
+        }
+    }
+}
+
 
 void resetGrid(vector<vector<char>> &grid, int &currentX, int &currentY)
 {
@@ -714,6 +748,7 @@ void resetGrid(vector<vector<char>> &grid, int &currentX, int &currentY)
         }
     }
 }
+
 
 void gameOver(int A_health, int Z_health)
 {
@@ -736,8 +771,6 @@ void gameOver(int A_health, int Z_health)
     }
 }
 
-
-
 int main()
 {
     srand(time(NULL));
@@ -749,7 +782,7 @@ int main()
     // int random_Z_attack_range = (rand() % 5) + 1; // random value between 1-5
     int A_health = 100;
     int A_attack_damage = 10;
-    int A_attack_range = 1;
+    int A_attack_range = 0;
     string player;
     vector<vector<char>> grid;
     // welcome void
@@ -791,8 +824,8 @@ int main()
         // displayBoard(numX, numY, grid);
         // resetGrid(grid,currentX, currentY);
 
-        moveCharacter(grid, currentX, currentY, A_health, Z_health, Z_attack_damage, player, zombieCoordinates);
-        moveZombies(numX, numY, grid, zombieCoordinates);
+        moveCharacter(grid, currentX, currentY, A_health, Z_health, Z_attack_damage, player, zombieCoordinates, A_attack_range);
+        moveZombies(numX, numY, grid, zombieCoordinates, Z_attack_range, A_health, Z_attack_damage, currentX, currentY);
         cout << "press any key to continue... " << endl;
         _getch();
 
