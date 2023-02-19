@@ -1267,25 +1267,6 @@ int main()
     _getch();
     system("cls");
 
-    int choice;
-    do
-    {
-        cout << "Please select an option:" << endl;
-        cout << "1. New game" << endl;
-        cout << "2. Load game" << endl;
-        cin >> choice;
-        cout << "press any key to continue... " << endl;
-        _getch();
-        system("cls");
-    } while (choice != 1 && choice != 2);
-
-    if (choice == 2)
-    {
-        loadGame(grid, currentX, currentY, A_health, player, "saved_game.txt");
-    }
-
-    else
-    {
 
         // board
         generateBoard(numX, numY, grid);
@@ -1329,7 +1310,6 @@ int main()
 
             system("cls");
             gameOver(A_health, Z_health);
-        }
     }
 
     return 0;
