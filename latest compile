@@ -16,7 +16,6 @@ int zombies;
 vector<pair<int, int>> zombieCoordinates;
 vector<char> objects = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-
 void welcome()
 {
     cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << endl;
@@ -953,15 +952,13 @@ void moveCharacter(vector<vector<char>> &grid, int &currentX, int &currentY, int
             return;
         }
         else
-            ;
-        cout << "Invalid! Please state (yes/no) only" << endl;
+            cout << "Invalid! Please state (yes/no) only" << endl;
     }
 
     else
     {
         cout << "Please enter a valid command or type Help for command menu" << endl;
     }
-
 }
 
 void moveZombies(int numX, int numY, vector<vector<char>> &grid, vector<pair<int, int>> &zombieCoordinates, int Z_attack_range, int &A_health, int Z_attack_damage, int currentX, int currentY)
@@ -1256,8 +1253,6 @@ int main()
     ;
     int A_attack_damage = 10;
     int A_attack_range = 1;
-    int currentX;
-    int currentY;
     std::string player;
     vector<vector<char>> grid;
     // welcome void
@@ -1267,49 +1262,48 @@ int main()
     _getch();
     system("cls");
 
+    // board
+    generateBoard(numX, numY, grid);
+    if (numX % 2 == 1 && numY % 2 == 1)
+    {
+        generateInpluto(numX, numY, grid);
+    }
+    int currentX = (numX - 1) / 2;
+    int currentY = (numY - 1) / 2;
+    generateZombies(numX, numY, grid, zombieCoordinates);
 
-        // board
-        generateBoard(numX, numY, grid);
-        if (numX % 2 == 1 && numY % 2 == 1)
+    cout << " " << endl;
+    cout << "Settings is updated" << endl;
+    cout << "Number of rows=>" << numX << endl;
+    cout << "Number of columns=>" << numY << endl;
+    cout << "Number of zombies=>" << zombies << endl;
+    cout << " " << endl;
+    cout << "Press any key to continue... " << endl;
+    _getch();
+    system("cls");
+
+    while (true)
+    {
+        if (zombies > 0 && zombies < 10)
         {
-            generateInpluto(numX, numY, grid);
+            displayBoard(numX, numY, grid);
+
+            displayAlienStatus(A_health, A_attack_damage, A_attack_range);
+            displayZombieStatus(zombies, Z_health, Z_attack_damage, Z_attack_range);
         }
-        int currentX = (numX - 1) / 2;
-        int currentY = (numY - 1) / 2;
-        generateZombies(numX, numY, grid, zombieCoordinates);
 
-        cout << " " << endl;
-        cout << "Settings is updated" << endl;
-        cout << "Number of rows=>" << numX << endl;
-        cout << "Number of columns=>" << numY << endl;
-        cout << "Number of zombies=>" << zombies << endl;
-        cout << " " << endl;
-        cout << "Press any key to continue... " << endl;
+        moveCharacter(grid, currentX, currentY, A_health, Z_health, Z_attack_damage, A_attack_damage, player, zombieCoordinates, A_attack_range);
         _getch();
-        system("cls");
-
-        while (true)
+        for (int i = 0; i < zombies; i++)
         {
-            if (zombies > 0 && zombies < 10)
-            {
-                displayBoard(numX, numY, grid);
+            moveZombies(numX, numY, grid, zombieCoordinates, Z_attack_range, A_health, Z_attack_damage, currentX, currentY);
+        }
 
-                displayAlienStatus(A_health, A_attack_damage, A_attack_range);
-                displayZombieStatus(zombies, Z_health, Z_attack_damage, Z_attack_range);
-            }
+        cout << "press any key to continue... " << endl;
+        _getch();
 
-            moveCharacter(grid, currentX, currentY, A_health, Z_health, Z_attack_damage, A_attack_damage, player, zombieCoordinates, A_attack_range);
-            _getch();
-            for (int i = 0; i < zombies; i++)
-            {
-                moveZombies(numX, numY, grid, zombieCoordinates, Z_attack_range, A_health, Z_attack_damage, currentX, currentY);
-            }
-
-            cout << "press any key to continue... " << endl;
-            _getch();
-
-            system("cls");
-            gameOver(A_health, Z_health);
+        system("cls");
+        gameOver(A_health, Z_health);
     }
 
     return 0;
